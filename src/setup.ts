@@ -16,6 +16,6 @@ export async function setupQt(options: SetupOptions): Promise<string> {
   const extractDir = options.qtDir;
   await download(downloadLink, archivePath, { name: 'Qt for Mac' });
   await extract(archivePath, extractDir);
-  console.log(`Qt was setup successfully.  QtDir: ${extractDir}`);
+  console.log(`Mini Qt was setup successfully.  QtDir: ${extractDir}`);
   return extractDir;
 }
