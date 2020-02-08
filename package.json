@@ -1,0 +1,31 @@
+{
+  "name": "nodegui-qt-installer",
+  "version": "1.0.0",
+  "description": "A minimal qt installer for nodegui",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "atulanand94@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/fs-extra": "^8.0.1",
+    "@types/node-fetch": "^2.5.4",
+    "@types/progress": "^2.0.3",
+    "@typescript-eslint/eslint-plugin": "^2.19.0",
+    "@typescript-eslint/parser": "^2.19.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1",
+    "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "7zip-min": "^1.1.1",
+    "fs-extra": "^8.1.0",
+    "node-fetch": "^2.6.0",
+    "progress": "^2.0.3"
+  }
+}
