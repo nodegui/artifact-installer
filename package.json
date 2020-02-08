@@ -27,9 +27,9 @@
   },
   "dependencies": {
     "7zip-min": "^1.1.1",
-    "mkdirp": "^1.0.3",
+    "env-paths": "^2.2.0",
+    "make-dir": "^3.0.0",
     "node-fetch": "^2.6.0",
-    "progress": "^2.0.3",
-    "tempy": "^0.3.0"
+    "progress": "^2.0.3"
   }
 }

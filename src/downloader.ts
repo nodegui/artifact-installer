@@ -3,10 +3,11 @@ import util from 'util';
 import fs from 'fs';
 import path from 'path';
 import stream from 'stream';
-import mkdirp from 'mkdirp';
+import mkdirp from 'make-dir';
 import Progress from 'progress';
 
 const streamPipeline = util.promisify(stream.pipeline);
+const fsExist = util.promisify(fs.exists);
 
 function progressBar(tokens: string, total: number): stream.PassThrough {
   const pt = new stream.PassThrough();
@@ -21,6 +22,11 @@ export async function download(link: string, outPath: string, options: DownloadO
   if (!response.ok) {
     throw new Error(`Error while downloading ${name}:${link}. ${response.statusText}`);
   }
+  if (options.skipIfCached) {
+    if (await fsExist(outPath)) {
+      return console.warn(`Archive already exists at ${outPath}. Skipping download....`);
+    }
+  }
   await mkdirp(path.dirname(outPath));
   const total = parseInt(`${response.headers.get('content-length')}`, 10);
   const totalInMb = (total / 1024 / 1024).toFixed(2);
@@ -31,4 +37,4 @@ export async function download(link: string, outPath: string, options: DownloadO
   );
 }
 
-type DownloadOptions = { name?: string };
+type DownloadOptions = { name?: string; skipIfCached?: boolean };
