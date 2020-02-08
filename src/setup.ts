@@ -10,14 +10,16 @@ type SupportedOs = 'linux' | 'win32' | 'darwin';
 type SetupOptions = {
   qtDir: string;
   downloadLink?: string;
+  cacheDir?: string;
   osType: SupportedOs;
 };
 
 export async function setupQt(options: SetupOptions): Promise<string> {
   const downloadLink = options.downloadLink || metadata[options.osType];
-  const archivePath = path.resolve(appPaths.cache, path.basename(downloadLink));
+  const cacheDir = options.cacheDir || appPaths.cache;
+  const archivePath = path.resolve(cacheDir, path.basename(downloadLink));
   const extractDir = options.qtDir;
-  await download(downloadLink, archivePath, { name: 'Qt for Mac', skipIfCached: true });
+  await download(downloadLink, archivePath, { name: 'Mini Qt', skipIfExist: true });
   await extract(archivePath, extractDir);
   console.log(`Mini Qt was setup successfully.  QtDir: ${extractDir}`);
   return extractDir;

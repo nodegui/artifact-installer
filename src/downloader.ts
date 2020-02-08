@@ -22,7 +22,7 @@ export async function download(link: string, outPath: string, options: DownloadO
   if (!response.ok) {
     throw new Error(`Error while downloading ${name}:${link}. ${response.statusText}`);
   }
-  if (options.skipIfCached) {
+  if (options.skipIfExist) {
     if (await fsExist(outPath)) {
       return console.warn(`Archive already exists at ${outPath}. Skipping download....`);
     }
@@ -37,4 +37,7 @@ export async function download(link: string, outPath: string, options: DownloadO
   );
 }
 
-type DownloadOptions = { name?: string; skipIfCached?: boolean };
+type DownloadOptions = {
+  name?: string;
+  skipIfExist?: boolean;
+};
