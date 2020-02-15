@@ -8,6 +8,9 @@
     "start": "node dist/index.js",
     "test": "jest --verbose"
   },
+  "files": [
+    "dist/"
+  ],
   "author": "atulanand94@gmail.com",
   "license": "ISC",
   "devDependencies": {
