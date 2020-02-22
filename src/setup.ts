@@ -7,10 +7,10 @@ import mkdirp from 'make-dir';
 
 type SetupOptions = {
   outDir: string;
+  id: string;
   downloadLink: string;
   cacheDir?: string;
   force?: boolean;
-  id: string;
   displayName?: string;
 };
 
