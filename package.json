@@ -1,6 +1,6 @@
 {
   "name": "@nodegui/artifact-installer",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "An artifact or prebuilt binary installer for for nodegui",
   "main": "dist/index.js",
   "scripts": {
@@ -31,7 +31,6 @@
   },
   "dependencies": {
     "7zip-min": "^1.1.1",
-    "empty-dir": "^2.0.0",
     "env-paths": "^2.2.0",
     "make-dir": "^3.0.0",
     "node-fetch": "^2.6.0",

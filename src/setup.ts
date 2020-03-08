@@ -2,7 +2,6 @@ import { download } from './downloader';
 import { extract } from './extractor';
 import path from 'path';
 import envPaths from 'env-paths';
-import emptyDir from 'empty-dir';
 import mkdirp from 'make-dir';
 
 type SetupOptions = {
@@ -12,6 +11,7 @@ type SetupOptions = {
   cacheDir?: string;
   force?: boolean;
   displayName?: string;
+  skipSetup: () => Promise<boolean>;
 };
 
 export async function setupArtifact(options: SetupOptions): Promise<string> {
@@ -24,7 +24,7 @@ export async function setupArtifact(options: SetupOptions): Promise<string> {
 
   await mkdirp(outDir);
 
-  if (!(await emptyDir(outDir)) && !force) {
+  if ((await options.skipSetup()) && !force) {
     console.log(`Skipping setup for ${displayName}...`);
     return outDir;
   }

@@ -7,9 +7,11 @@ describe('Setup QT for win32', () => {
   const osType = 'win32';
   const outDir = outputDir(osType);
   let outPath = '';
-
+  const skipSetup = async (): Promise<boolean> => {
+    return fs.existsSync(path.resolve(outDir, '5.13.0', 'msvc2017_64', 'lib'));
+  };
   beforeAll(async () => {
-    outPath = await setupArtifact({ outDir, downloadLink: metadata.win32, id: 'nodeguiqt' });
+    outPath = await setupArtifact({ outDir, skipSetup, downloadLink: metadata.win32, id: 'nodeguiqt' });
   }, TIMEOUT);
 
   test('check if output path is same as specified: ', () => {

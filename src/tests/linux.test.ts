@@ -7,9 +7,11 @@ describe('Setup QT for linux', () => {
   const osType = 'linux';
   const outDir = outputDir(osType);
   let outPath = '';
-
+  const skipSetup = async (): Promise<boolean> => {
+    return fs.existsSync(path.resolve(outDir, '5.13.0', 'gcc_64', 'lib'));
+  };
   beforeAll(async () => {
-    outPath = await setupArtifact({ outDir, downloadLink: metadata.linux, id: 'nodeguiqt' });
+    outPath = await setupArtifact({ outDir, skipSetup, downloadLink: metadata.linux, id: 'nodeguiqt' });
   }, TIMEOUT);
 
   test('check if output path is same as specified: ', () => {
