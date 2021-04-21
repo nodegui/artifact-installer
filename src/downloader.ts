@@ -32,7 +32,10 @@ export async function download(link: string, outPath: string, options: DownloadO
   const totalInMb = (total / 1024 / 1024).toFixed(2);
   await streamPipeline(
     response.body,
-    progressBar(`Downloading ${name} [:bar] :percent of ${totalInMb}MB :etas`, total),
+    // If "content-length" not exists(NaN), only show ":current"
+    total !== total
+      ? progressBar(`Downloading ${name} :currentb`, Number.MAX_SAFE_INTEGER)
+      : progressBar(`Downloading ${name} [:bar] :percent of ${totalInMb}MB :etas`, total),
     fs.createWriteStream(outPath),
   );
 }
